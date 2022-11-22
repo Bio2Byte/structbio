@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 #SBATCH --nodes=1
 #SBATCH --gpus-per-node=1
-#SBATCH --cpus-per-gpu=16
-#SBATCH --mem=16G
-#SBATCH --partition=ampere_gpu
+#SBATCH --cpus-per-gpu=12
+#SBATCH --mem=12G
+#SBATCH --partition=pascal_gpu
 #SBATCH --time=24:00:00
 #SBATCH --job-name=npt_pme
 #SBATCH -o %x.o%j
@@ -43,9 +43,9 @@ if [ ! -f "$lastTPR" ]; then
     nextTPR=npt_pme_0001.tpr
     gmx grompp \
         -f npt_pme.mdp \
-        -p ../1_prepi/*.top \
-        -c $(ls ../2_equil/*.gro | sed '$!d') \
-        -t $(ls ../2_equil/*.cpt | sed '$!d') \
+        -p ../1_prepare_input/*.top \
+        -c $(ls ../2_equilibration/*.gro | sed '$!d') \
+        -t $(ls ../2_equilibration/*.cpt | sed '$!d') \
         -o "$nextTPR"
     check_success "Failure occurred executing GMX GROMPP"
 
@@ -58,11 +58,11 @@ if [ ! -f "$lastTPR" ]; then
     check_success "Failure occurred executing GMX MDRUN"
 
 else
-    # Extend simulation by 50 ns
+    # Extend simulation by 100 ns
     iter=$(grep -oE '[1-9][0-9]*' <<<$lastTPR)
     ((iter++))
     nextTPR="$(printf 'npt_pme_%04d.tpr' $iter)"
-    gmx convert-tpr -s "$lastTPR" -o "$nextTPR" -extend 50000
+    gmx convert-tpr -s "$lastTPR" -o "$nextTPR" -extend 100000
     check_success "Failure occurred executing GMX CONVERT-TPR"
     
     # Run MDRUN

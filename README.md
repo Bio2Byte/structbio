@@ -20,17 +20,19 @@ This practical course consists in 3 sessions of 2 hours each based in Jupyter No
     - [analysis1.ipynb](https://github.com/Bio2Byte/structbio/blob/main/2_moldynamics/4_analysis/analysis1.ipynb)
     - [analysis2.ipynb](https://github.com/Bio2Byte/structbio/blob/main/2_moldynamics/4_analysis/analysis2.ipynb)
 
-### Quick start
+### Getting started
+
 To get a copy of this repository, please follow these steps inside a terminal session:
 
-```console
-# Change the current directory to your VSC user's SCRATCH directory
+```sh
+# Change the current directory to your VSC SCRATCH directory
 cd $VSC_SCRATCH
 
+# Download course files from GitHub
 git clone https://github.com/Bio2Byte/structbio.git
 
-# Create a shortcut of that copy inside your VSC user's HOME directory
-ln -s $VSC_SCRATCH/structbio $VSC_HOME/structbio
+# Create a softlink of the directory inside your VSC HOME directory
+sh structbio/hydra_setup.sh
 ```
 
 ### Contents

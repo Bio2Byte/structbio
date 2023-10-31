@@ -1,0 +1,6 @@
+Course material for course on structural biology at VUB
+
+Copyright (c) 2023 by Adrian Diaz, David Bickel, and Wim Vranken 
+
+This work is licensed under CC BY 4.0. To view a copy of this license, visit http://creativecommons.org/licenses/by/4.0/
+
